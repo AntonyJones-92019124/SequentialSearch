@@ -19,12 +19,18 @@ import utils.In;
 import static org.junit.Assert.*;
 //import utils.Stopwatch;
 
+
 /*
  * @Date 19/07/2019
  * @author Computer Power Plus & Antony Jones 92019124
  */
 public class SequentialSearch {
-     
+    
+    //Step counters
+    private static int step1Counter;
+    private static int step2Counter;
+    private static int step3Counter;
+    
     //
     // YOUR TASK: refactor the class name to SequentialSearch, using the IDE
     //
@@ -35,7 +41,8 @@ public class SequentialSearch {
  * @param collection the collection to be searched, in this case an array of int
  * @return the boolean
  * 
- */    
+ */ 
+    
 
     public static boolean contains(int term, int[] collection){
         
@@ -53,6 +60,7 @@ public class SequentialSearch {
  * 
  */    
 
+    
     public static int indexOf(int term, int[] collection){
     
     //
@@ -64,7 +72,10 @@ public class SequentialSearch {
     { 
         if(collection[i] == term)
         
-            return i; 
+            return i;
+        
+        //Increment step counter one for first step
+        step1Counter++;
        
     }
         // default implementation: not found
@@ -81,6 +92,7 @@ public class SequentialSearch {
 *
 * @param args the command-line arguments
 */
+   
     
     public static void main(String[] args)  { 
           
@@ -113,6 +125,9 @@ public class SequentialSearch {
         assertEquals(false, SequentialSearch.contains(35, collection));
         assertEquals(false, SequentialSearch.contains(1, collection));
         
+        //Increment step counter two for second step
+        step2Counter++;
+        
         //boolean variable result set to int term from collection
         boolean result = contains(term, collection);
         
@@ -122,14 +137,20 @@ public class SequentialSearch {
         else
             System.out.print("Element is not present in collection array");
         
+        //Increment step counter three for third step
+        step3Counter++;
+        
         // Stop timer       
         long stopTimer = System.currentTimeMillis();
-        
         //Set stopTimer - startTimer value to elapsedTime variable     
         long elapsedTime = stopTimer - startTimer;
         
         //Print elaspeTime value in seconds      
         System.out.println(elapsedTime);
+        
+        //Print out amount of steps in the algorithm
+        System.out.println("Total steps for algoritim are " + step1Counter  + " " +
+                step2Counter + " " + step3Counter);
         
         } 
         
