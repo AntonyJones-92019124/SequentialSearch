@@ -1,9 +1,3 @@
-package sequentialsearch;
-
-import java.util.In;
-
-//import utils.Stopwatch;
-
 /**
  * The class SequentialSearch provides a framework for implementing 
  * a sequential search algorithm, also known as linear search, on a collection
@@ -16,12 +10,21 @@ import java.util.In;
  * "Collection" in this class is used in the broader sense 
  * and not in the strict Java sense. For example a collection may be an array 
  * or a list
- * 
- * @author Computer Power Plus
  */
+ 
 
+package sequentialsearch;
+
+import utils.In;
+import static org.junit.Assert.*;
+//import utils.Stopwatch;
+
+/*
+ * @Date 19/07/2019
+ * @author Computer Power Plus & Antony Jones 92019124
+ */
 public class SequentialSearch {
-
+     
     //
     // YOUR TASK: refactor the class name to SequentialSearch, using the IDE
     //
@@ -51,67 +54,91 @@ public class SequentialSearch {
  */    
 
     public static int indexOf(int term, int[] collection){
-
-          int n = collection.length; 
+    
+    //
+        // YOUR TASK: implement a sequential search of term in collection -
+    //  
+    
+    int n = collection.length; 
     for(int i = 0; i < n; i++) 
     { 
-        if(collection[i] == term) 
+        if(collection[i] == term)
+        
             return i; 
+       
     }
         // default implementation: not found
         return -1;        
     }
 
 /**
-     * Reads in 
-     * - a search term (integer)
-     * - a sequence of integers from a file (.txt file)
-     * both specified as a command-line argument;
-     * searches for the term in the collection of integers
-     * prints the result of the search and the time in seconds
-     *
-     * @param args the command-line arguments
-     */
-
+* Reads in 
+* - a search term (integer)
+* - a sequence of integers from a file (.txt file)
+* both specified as a command-line argument;
+* searches for the term in the collection of integers
+* prints the result of the search and the time in seconds
+*
+* @param args the command-line arguments
+*/
+    
     public static void main(String[] args)  { 
+          
         //Read the search term
-
-        int term = Integer.parseInt(args[0]);
-
-        // Read the input data stream (into the collection)
-
-        // - this uses utility classes provided
-
-        In in;
-        int[] collection = { 0, 1, 2, 3, 4, 10, 40 };
         
+        int term = Integer.parseInt(args[0]);
+        
+        // Read the input data stream (into the collection)
+        // - this uses utility classes provided
+        
+        In in;
+        int[] collection = {3, 56, 67, 43, 10, 2};
         try{ 
             in = new In(args[1]);
             collection = in.readAllInts();
-        term = 2;
-        int result = indexOf(term, collection); 
+               
+        // Start timer own implementation
+        long startTimer = System.currentTimeMillis();
         
-        if(result == -1) 
-            System.out.print("Element is not present in array"); 
+        //Set timer to increment if less than 10000000
+        long total = 0;
+        for (int i = 0; i < 10000000; i++) {
+            total += i;
+            }
+        
+       //Small collection to check collection array for
+        assertEquals(true, SequentialSearch.contains(67, collection));
+        assertEquals(true, SequentialSearch.contains(2, collection));
+        assertEquals(true, SequentialSearch.contains(3, collection));
+        assertEquals(false, SequentialSearch.contains(35, collection));
+        assertEquals(false, SequentialSearch.contains(1, collection));
+        
+        //boolean variable result set to int term from collection
+        boolean result = contains(term, collection);
+        
+        //If variable result is equal to -1 print out not present in array        
+        if(result == true) 
+            System.out.print("Element is present at index " + result); 
         else
-            System.out.print("Element is present at index " + result);
-
-            
-            // Start timer - you may use your own implementation 
-
-            //            or the utility class Stopwatch that is provided
-
-            
-            // Search for term in collection by calling appropriate class methods
-
-            // Stop timer
-
-            // Print result
-
-        } catch (java.lang.IllegalArgumentException e) {
+            System.out.print("Element is not present in collection array");
+        
+        // Stop timer       
+        long stopTimer = System.currentTimeMillis();
+        
+        //Set stopTimer - startTimer value to elapsedTime variable     
+        long elapsedTime = stopTimer - startTimer;
+        
+        //Print elaspeTime value in seconds      
+        System.out.println(elapsedTime);
+        
+        } 
+        
+        catch (java.lang.IllegalArgumentException e) {
             // Error with input data file
             System.out.println(e+ ": Incorrect data file as argument: " + args[1]);
 
-        }
-    } 
-}
+        }//End of catch Exceeption
+       
+        
+    }//End of main class
+}//End of SequentialSearch class
